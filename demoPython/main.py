@@ -18,7 +18,7 @@ domain = OrgCreds.get('my_credentials', 'domain')
 
 # Establish a connection to your Salesforce instance
 print('Establish a connection to your Salesforce instance')
-source_sf = Salesforce(username=username, password=password, security_token= security_token, domain= domain)
+sf = Salesforce(username=username, password=password, security_token= security_token, domain= domain)
 print('Connection Established')
 
 result = sf.query_all("SELECT Id, Name, Email FROM Contact")
