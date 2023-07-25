@@ -13,11 +13,23 @@ jobs:
       uses: actions/checkout@v2
 
     - name: Set up Python
+      # The actions/cache step below uses this id to get the exact python version
+      id: setup-python
       uses: actions/setup-python@v2
       with:
         python-version: '3.11'  # Set up the required Python version
 
+    - name: check cache
+      uses: actions/cache@v3
+      with:
+       id: pip-cache # use this to check for `cache-hit` ==> if: steps.pip-cache.outputs.cache-hit != 'true'
+       path: ~/.local/share/virtualenvs
+       key: ${{ runner.os }}-python-${{ steps.setup-python.outputs.python-version }}-pipenv-${{ hashFiles('Pipfile.lock') }}
+       restore-keys: |
+            ${{ runner.os }}-python-
+
     - name: Install dependencies
+      if: steps.pip-cache.outputs.cache-hit != 'true'
       run: |
         python -m pip install --upgrade pip
         python -m pip install -r requirements.txt
