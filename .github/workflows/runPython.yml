@@ -1,7 +1,6 @@
 name: Run Python Script
 
-on:
-  workflow_dispatch:  # Manual event to trigger the workflow on demand
+on: workflow_dispatch  # Manual event to trigger the workflow on demand
 
 jobs:
   run_package:
