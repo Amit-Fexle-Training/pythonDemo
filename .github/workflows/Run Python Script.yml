@@ -15,10 +15,6 @@ on:
           - info
           - warning
           - debug
-      input3:
-        description: 'True or False'
-        required: true
-        type: boolean
       input4:
         description: 'String Input'
         required: true
@@ -57,7 +53,11 @@ jobs:
           fi
 
       - name: Set user input as an environment variable
-        run: echo "USER_INPUT=${{ inputs.user_input }}" >> $GITHUB_ENV
+        run: |
+          echo "USER_INPUT=${{ inputs.user_input }}" >> $GITHUB_ENV
+          echo "INPUT1=${{ inputs.input1 }}" >> $GITHUB_ENV
+          echo "INPUT2=${{ inputs.input2 }}" >> $GITHUB_ENV
+          echo "INPUT4=${{ inputs.input4 }}" >> $GITHUB_ENV
 
       - name: Run Python script
         run: |
