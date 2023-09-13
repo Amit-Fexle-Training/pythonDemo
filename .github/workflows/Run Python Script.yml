@@ -52,17 +52,9 @@ jobs:
             exit 1
           fi
 
-      - name: Set user input as an environment variable
-        run: |
-          echo "USER_INPUT=${{ inputs.user_input }}" >> $GITHUB_ENV
-          echo "INPUT1=${{ inputs.input1 }}" >> $GITHUB_ENV
-          echo "INPUT2=${{ inputs.input2 }}" >> $GITHUB_ENV
-          echo "INPUT4=${{ inputs.input4 }}" >> $GITHUB_ENV
-
       - name: Run Python script
         run: |
-          choice=${USER_INPUT}
-          python main.py "${choice}"
+          python main.py "${{inputs.user_input}}" "{{inputs.input2}}" "{{inputs.input4}}" "{{inputs.input5}}"
           if [ $? -ne 0 ]; then
             echo "Python script failed"
             exit 1
