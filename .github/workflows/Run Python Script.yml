@@ -1,4 +1,4 @@
-name: Run Python Script 1.1
+name: Run Python Script 1.2
 
 on:
   workflow_dispatch:
@@ -30,16 +30,19 @@ jobs:
 
       - name: Install Python dependencies
         run: |
-          python -m pip install --upgrade pip
           pip install -r ./requirements.txt
           if [ $? -ne 0 ]; then
             echo "Failed to install Python dependencies"
             exit 1
           fi
 
+      - name: Set user input as an environment variable
+        run: echo "USER_INPUT=${{ inputs.user_input }}" >> $GITHUB_ENV
+
       - name: Run Python script
         run: |
-          python main.py "${{ inputs.user_input }}"
+          choice=${USER_INPUT}
+          python main.py "${choice}"
           if [ $? -ne 0 ]; then
             echo "Python script failed"
             exit 1
