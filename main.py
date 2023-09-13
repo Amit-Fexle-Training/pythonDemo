@@ -19,7 +19,7 @@ domain = OrgCreds.get('my_credentials', 'domain')
 
 # Establish a connection to your Salesforce instance
 choice = sys.argv[1]
-for i in rangr(len(sys.argv)):
+for i in range(len(sys.argv)):
   print(sys.argv[i])
 if choice.lower() == 'y':
   print('Establish a connection to your Salesforce instance')
