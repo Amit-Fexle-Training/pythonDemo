@@ -7,6 +7,7 @@ import warnings
 import time
 import pandas as pd
 import json
+import sys
 
 OrgCreds = configparser.ConfigParser()
 OrgCreds.read('config.ini')
@@ -17,7 +18,7 @@ security_token = OrgCreds.get('my_credentials', 'security_token')
 domain = OrgCreds.get('my_credentials', 'domain')
 
 # Establish a connection to your Salesforce instance
-choice = 'y'
+choice = sys.argv[1]
 if choice.lower() == 'y':
   print('Establish a connection to your Salesforce instance')
   source_sf = Salesforce(username=username, password=password, security_token= security_token, domain= domain)
