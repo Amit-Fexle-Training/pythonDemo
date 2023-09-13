@@ -4,7 +4,27 @@ on:
   workflow_dispatch:
     inputs:
       user_input:
-        description: Input to be passed to the Python script
+        description: Input 1
+        required: true
+      input2:
+        description: 'Input 2'
+        required: true
+        default: 'warning'
+        type: choice
+        options:
+          - info
+          - warning
+          - debug
+      input3:
+        description: 'True or False'
+        required: true
+        type: boolean
+      input4:
+        description: 'String Input'
+        required: true
+        type: string
+      input5:
+        description: 'Enter any value'
         required: true
 
 jobs:
@@ -27,6 +47,14 @@ jobs:
           key: ${{ runner.os }}-python-${{ hashFiles('**/requirements.txt') }}
           restore-keys: |
             ${{ runner.os }}-python-
+
+      - name: Install Python dependencies
+        run: |
+          pip install -r ./requirements.txt
+          if [ $? -ne 0 ]; then
+            echo "Failed to install Python dependencies"
+            exit 1
+          fi
 
       - name: Set user input as an environment variable
         run: echo "USER_INPUT=${{ inputs.user_input }}" >> $GITHUB_ENV
