@@ -1,0 +1,45 @@
+name: Run Python Script
+
+on:
+  workflow_dispatch:
+    inputs:
+      user_input:
+        description: Input to be passed to the Python script
+        required: true
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.8
+
+      - name: Cache Python dependencies
+        uses: actions/cache@v2
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-python-${{ hashFiles('**/requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-python-
+
+      - name: Install Python dependencies
+        run: |
+          pip install -r ./requirements.txt
+          if [ $? -ne 0 ]; then
+            echo "Failed to install Python dependencies"
+            exit 1
+          fi
+
+      - name: Run Python script
+        run: |
+          python main.py "${{ inputs.user_input }}"
+          if [ $? -ne 0 ]; then
+            echo "Python script failed"
+            exit 1
+          fi
