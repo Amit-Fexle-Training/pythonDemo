@@ -54,7 +54,7 @@ jobs:
 
       - name: Run Python script
         run: |
-          python main.py "${{inputs.user_input}}" "${{inputs.Input 2}}" "${{inputs.input4}}" "${{inputs.input5}}"
+          python main.py "${{inputs.user_input}}" "${{inputs.Input_2}}" "${{inputs.input4}}" "${{inputs.input5}}"
           if [ $? -ne 0 ]; then
             echo "Python script failed"
             exit 1
