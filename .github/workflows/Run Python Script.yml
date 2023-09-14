@@ -6,7 +6,7 @@ on:
       user_input:
         description: Input 1
         required: true
-      input2:
+      Input 2:
         description: 'Input 2'
         required: true
         default: 'warning'
@@ -54,7 +54,7 @@ jobs:
 
       - name: Run Python script
         run: |
-          python main.py "${{inputs.user_input}}" "${{inputs.input2}}" "${{inputs.input4}}" "${{inputs.input5}}"
+          python main.py "${{inputs.user_input}}" "${{inputs.input_2}}" "${{inputs.input4}}" "${{inputs.input5}}"
           if [ $? -ne 0 ]; then
             echo "Python script failed"
             exit 1
