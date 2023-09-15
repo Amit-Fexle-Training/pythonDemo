@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       user_input:
-        description: Input 1
+        description: ${{ env.INPUT1_DESCRIPTION }}
         required: true
       input2:
         description: 'Input 2'
