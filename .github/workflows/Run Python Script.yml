@@ -4,12 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       user_input:
-        description: |
-          | alpha
-          
-          | Beta
-          
-          | Gamma
+        description: 'Input 1\n Input3'
         required: true
       input2:
         description: 'Input 2'
