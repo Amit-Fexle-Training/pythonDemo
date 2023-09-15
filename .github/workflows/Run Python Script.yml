@@ -6,7 +6,9 @@ on:
       user_input:
         description: |
           | alpha
+          
           | Beta
+          
           | Gamma
         required: true
       input2:
